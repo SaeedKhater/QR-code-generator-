@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Digital Business Card Generator</title>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <a href="#" class="logo">Digital Business Card Generator</a>
+            <nav class="navigation">
+                <a href="#services">Services</a>
+                <a href="#" id="loginBtn">Log In</a>
+                <a href="#contact-us">Contact Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="main">
+        <div class="container">
+            <div class="hero-content">
+                <h1>The New Era of Digital Business Cards</h1>
+                <p class="subtitle">Sustainability, Creativity, & Easy Data Sharing With a Single Tap</p>
+                <p class="description">
+                    Elevate your professional networking strategy with customizable NFC digital business cards, NFC tags & QR code business card collections.
+                </p>
+                <a href="index.html" class="main-btn" id="createCardBtn">Create Your Business Card For Free</a>
+                <div class="social-icons">
+                    <a href="http://Wa.me/+905524942025" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="https://www.instagram.com/upi7s/" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/saeed-khater-2a5757223/" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="mailto:saeedtariq444@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="cards" id="services">
+        <div class="container">
+            <h2 class="title">Our Services</h2>
+            <div class="content">
+                <!-- NFC Support Card -->
+                <div class="card">
+                    <div class="icon">
+                        <i class="fa-brands fa-nfc-symbol"></i>
+                    </div>
+                    <div class="info">
+                        <h3>NFC Support</h3>
+                        <p>
+                            Seamlessly share your contact details with a single tap using NFC technology. 
+                            Stand out at events or meetings while promoting eco-friendly networking.
+                        </p>
+                    </div>
+                </div>
+                <!-- QR Code Card -->
+                <div class="card">
+                    <div class="icon">
+                        <i class="fa-solid fa-qrcode"></i>
+                    </div>
+                    <div class="info">
+                        <h3>QR Code</h3>
+                        <p>
+                            Make sharing effortless—generate a unique QR code to share your contact 
+                            details instantly. A simple and memorable way to connect.
+                        </p>
+                    </div>
+                </div>
+                <!-- Quick Support Card -->
+                <div class="card">
+                    <div class="icon">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <div class="info">
+                        <h3>Quick Support</h3>
+                        <p>
+                            Our dedicated team is here to assist with customization, troubleshooting, 
+                            and technical support for your digital business card.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Card Generation Modal -->
+    <div id="generateCardModal" style="display:none;">
+        <div class="modal-content">
+            <h3>Create Your Business Card</h3>
+            <input type="text" id="name" placeholder="Name" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <input type="text" id="phone" placeholder="Phone" required>
+            <input type="text" id="job" placeholder="Job Title" required>
+            <button onclick="generateBusinessCard()">Generate Card</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    </div>
+
+    <!-- Display Generated Business Card -->
+    <div id="cardDisplay" style="display:none;"></div>
+
+    <!-- NFC Popup -->
+    <div id="nfc-popup" style="display:none;">
+        <div class="popup-content">
+            <span id="closeNfcPopup" class="close-btn">&times;</span>
+            <h3>NFC Simulation</h3>
+            <p>Your NFC business card has been tapped! Contact details successfully shared.</p>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
+    <script>
+        // Get elements for business card creation and NFC simulation
+        const createCardBtn = document.getElementById('createCardBtn');
+        const nameInput = document.getElementById('name');
+        const emailInput = document.getElementById('email');
+        const phoneInput = document.getElementById('phone');
+        const jobInput = document.getElementById('job');
+        const generateCardModal = document.getElementById('generateCardModal');
+        const cardDisplay = document.getElementById('cardDisplay');
+        const nfcPopup = document.getElementById('nfc-popup');
+        const closeNfcPopupBtn = document.getElementById('closeNfcPopup');
+
+        // Function to open the business card generation modal
+        createCardBtn.addEventListener('click', () => {
+            generateCardModal.style.display = 'block';
+        });
+
+        // Function to close the modal
+        function closeModal() {
+            generateCardModal.style.display = 'none';
+        }
+
+        // Function to create the business card
+        function generateBusinessCard() {
+            const name = nameInput.value;
+            const email = emailInput.value;
+            const phone = phoneInput.value;
+            const job = jobInput.value;
+
+            // Check if all fields are filled
+            if (name && email && phone && job) {
+                // Display the generated business card
+                cardDisplay.style.display = 'block';
+                cardDisplay.innerHTML = `
+                    <div class="card">
+                        <h3>${name}</h3>
+                        <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+                        <p><strong>Phone:</strong> <a href="tel:${phone}">${phone}</a></p>
+                        <p><strong>Job Title:</strong> ${job}</p>
+                        <div id="qrcode"></div>
+                        <button onclick="simulateNFC()">Simulate NFC Tap</button>
+                    </div>
+                `;
+
+                // Generate the QR code
+                QRCode.toCanvas(document.getElementById('qrcode'), `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nJob Title: ${job}`, function(error) {
+                    if (error) console.error(error);
+                });
+
+                generateCardModal.style.display = 'none'; // Close the modal after creating card
+            } else {
+                alert("Please fill in all fields.");
+            }
+        }
+
+        // NFC Simulation function
+        function simulateNFC() {
+            nfcPopup.style.display = 'block'; // Show the NFC popup
+        }
+
+        // Close the NFC popup
+        closeNfcPopupBtn.addEventListener('click', () => {
+            nfcPopup.style.display = 'none'; // Hide the NFC popup
+        });
+    </script>
+
+<script src="scripts/main.js"></script>
+
+</body>
+</html>

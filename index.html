@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Card with QR Code</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        #qrcode {
+            margin-top: 20px;
+        }
+
+        .card {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header text-center">
+                <h3>Generate Your Business Card</h3>
+            </div>
+            <div class="card-body">
+                <form onsubmit="return generateQRCode(event)">
+                    <div class="mb-3">
+                        <label for="Name" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="Name" placeholder="Enter your full name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Phone" class="form-label">Phone Number</label>
+                        <input type="tel" class="form-control" id="Phone" placeholder="Enter your phone number" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Email" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="Email" placeholder="Enter your email">
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Generate QR Code</button>
+                    </div>
+                </form>
+                <div id="qrcode" class="text-center"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function generateQRCode(event) {
+            event.preventDefault();
+
+            // Get user input
+            const name = document.getElementById("Name").value.trim();
+            const phone = document.getElementById("Phone").value.trim();
+            const email = document.getElementById("Email").value.trim();
+
+            // Construct the vCard
+            const vCard = `BEGIN:VCARD
+VERSION:3.0
+FN:${name}
+TEL:${phone}
+EMAIL:${email}
+END:VCARD`;
+
+            // Clear previous QR code
+            const qrCodeContainer = document.getElementById("qrcode");
+            qrCodeContainer.innerHTML = "";
+
+            // Generate the QR code
+            try {
+                new QRCode(qrCodeContainer, {
+                    text: vCard,
+                    width: 200,
+                    height: 200,
+                    correctLevel: QRCode.CorrectLevel.L,
+                });
+            } catch (error) {
+                console.error("QR Code generation error:", error);
+                alert("An error occurred while generating the QR code. Please try again.");
+            }
+        }
+    </script>
+</body>
+
+</html>

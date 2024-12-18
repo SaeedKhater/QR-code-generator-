@@ -1,0 +1,301 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+/* Header Section */
+header {
+    background-color: #ffffff;
+    width: 100%;
+    position: fixed;
+    z-index: 999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 200px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    text-decoration: none;
+    color: #252ea7;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.8rem;
+    transition: color 0.3s ease;
+}
+
+.logo:hover {
+    color: #601cfc;
+}
+
+.navigation a {
+    color: #252ea7;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-left: 30px;
+    transition: color 0.3s ease;
+}
+
+.navigation a:hover {
+    color: #601cfc;
+}
+
+/* Section Styling */
+section {
+    padding: 120px 200px;
+}
+
+/* Hero Section */
+.main {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: url(images/backgorund.jpeg) no-repeat center center/cover;
+    position: relative;
+    color: #ffffff;
+}
+
+.main h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.main .subtitle {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
+
+.main .description {
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.main-btn {
+    color: #ffffff;
+    background-color: #601cfc;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    display: inline-block;
+    padding: 12px 24px;
+    border-radius: 8px;
+    transition: all 0.4s ease;
+}
+
+.main-btn:hover {
+    background-color: rgba(40, 1, 180, 0.89);
+    transform: translateY(-5px);
+}
+
+.social-icons a {
+    color: #ffffff;
+    font-size: 1.5rem;
+    margin: 0 15px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #601cfc;
+    transform: scale(1.1);
+}
+
+/* Section Titles */
+.title {
+    text-align: center;
+    color: #601cfc;
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 50px;
+}
+
+/* Services Section */
+.content {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.card {
+    background-color: #ffffff;
+    width: 300px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.icon {
+    color: #284df3;
+    font-size: 5rem;
+    margin-bottom: 20px;
+}
+
+.info h3 {
+    color: #252ea7;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.info p {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Utility Styles */
+:root {
+    --primary-color: #601cfc;
+    --secondary-color: #252ea7;
+    --light-color: #f0f0f0;
+}
+
+a {
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    header {
+        padding: 10px 100px;
+    }
+
+    section {
+        padding: 80px 100px;
+    }
+
+    .main {
+        padding: 20px;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px 50px;
+    }
+
+    section {
+        padding: 50px 30px;
+    }
+
+    .card {
+        width: 100%;
+    }
+}
+
+/* NFC Guide Section */
+.nfc-guide {
+    background-color: #f7f7f7;
+    padding: 80px 200px;
+    text-align: center;
+}
+
+.nfc-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.nfc-info {
+    max-width: 50%;
+    text-align: left;
+    color: #333;
+    font-size: 1.1em;
+    line-height: 1.8;
+}
+
+.nfc-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #601cfc;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.nfc-btn:hover {
+    background-color: rgba(40, 1, 180, 0.89);
+    transform: scale(1.1);
+}
+
+.nfc-image img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* NFC Popup */
+.nfc-popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+}
+
+.popup-content h3 {
+    margin-bottom: 15px;
+    color: #601cfc;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #601cfc;
+}
+
